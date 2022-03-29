@@ -35,22 +35,22 @@ void setup()
 }
 
 void loop() {
+ if(pressureSensor.isConnected()==true)
+ {
+ if(pressureSensor.getStatus()==0x00)
+ {
+  pressureSensor.begin();
+ }
   Serial.print("Pressure (hPa): "); 
   Serial.print(pressureSensor.getPressure_hPa());          // Get the pressure reading in hPa
   Serial.print(", Temperature (degC): "); 
   Serial.println(pressureSensor.getTemperature_degC());    // Get the temperature in degrees C
+}
+else
+{
+  Serial.println("Disconnected");
+  pressureSensor.begin();
+} 
 
   delay(40);                                               // Wait - 40 ms corresponds to the maximum update rate of the sensor (25 Hz)
- myLog.println ("This goes to the log file");
-  Serial.println ("This goes to the terminal");
-  Serial.print("Pressure in hPa");
-  delay(40);// Wait - 40 ms corresponds to the maximum update rate of the sensor (25 Hz)
-
-  myLog.println("This is recorded to the default log file");
-  myLog.append("appendMe.txt");
-  myLog.println("This is recorded to appendMe.txt");
-
-  myLog.syncFile();
-
-  Serial.println("Done!");
 }
