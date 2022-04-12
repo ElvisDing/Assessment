@@ -21,7 +21,7 @@ void setup()
   myLog.begin(); //Open connection to OpenLog (no pun intended)
 
   Serial.begin(9600); //9600bps is used for debug statements
-  myLog.create("Elvis.txt");
+  myLog.create("Elvis.txt"); 
   myLog.append("Elvis.txt");
 
   myLog.syncFile();
@@ -31,14 +31,14 @@ void setup()
 }
 
 void loop() {
-  if (pressureSensor.isConnected() == true)
+  if (pressureSensor.isConnected() == true);
   {
-    if (pressureSensor.getStatus() == 0x00).
-0000000
+  if (pressureSensor.getStatus() == 0x00);
+
   {
     Serial.println("Error with pressureSensor");
     pressureSensor.begin();
   }
   delay(40);                                               // Wait - 40 ms corresponds to the maximum update rate of the sensor (25 Hz)
   myservo.write(pos);              // tell servo to go to position in variable 'pos'
-}
+}}
