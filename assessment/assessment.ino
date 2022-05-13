@@ -9,13 +9,14 @@ LPS25HB pressureSensor; // Create an object of the LPS25HB class
 Servo myservo;  // create servo object to control a servo
 
 
-int ledPin = LED_BUILTIN; //Status LED connected to digital pin 13   //?
+
 int pos = 0;    // variable to store the servo position
-const byte OpenLogAddress = 42; //Default Qwiic OpenLog I2C address
+const byte OpenLogAddress = 42; // Default Qwiic OpenLog I2C address
+const byte SERVO = 11;// 
 
 void setup()
 {
-  pinMode(ledPin, OUTPUT); //?
+ 
   pressureSensor.begin();
   Wire.begin();
   myLog.begin(); //Open connection to OpenLog (no pun intended)
@@ -26,8 +27,13 @@ void setup()
   myLog.print("Pressure, Temperature");
   myLog.syncFile();
 
-  Serial.println("Done!");  //?
-  myservo.attach(9);  // attaches the servo on pin 9 to the servo object   //?
+/*Pressure, Temperature
+ * 25,15
+ * 25,300
+ */
+
+  Serial.println("set up finished");  
+  myservo.attach(SERVO);  // attaches the servo on pin 9 to the servo object   
 }
 
 void loop() {
@@ -43,9 +49,9 @@ void loop() {
     Serial.print(", Temperature (degC): ");
     Serial.println(pressureSensor.getTemperature_degC()); // Get the temperature in degrees C by dividing the ADC count by 480
 
-    myLog.print("Pressure (hPa): ");
+
     myLog.print(pressureSensor.getPressure_hPa()); // Get the pressure reading in hPa as determined by dividing the number of ADC counts by 4096 (according to the datasheet)
-    myLog.print(", Temperature (degC): ");
+    myLog.print(",");
     myLog.println(pressureSensor.getTemperature_degC()); // Get the temperature in degrees C by dividing the ADC count by 480
 
     myLog.syncFile();
